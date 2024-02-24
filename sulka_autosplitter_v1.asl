@@ -48,7 +48,6 @@ update
 	{
 		vars.room_changed = false;
 	}
-print(current.tuto_player_exists.ToString());
 }
 
 start
