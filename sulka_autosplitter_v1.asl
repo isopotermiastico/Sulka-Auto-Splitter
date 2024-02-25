@@ -1,9 +1,8 @@
 state("Sulka")
 {
 	uint room : "Sulka.exe", 0x722248;
-	uint minutes: "Sulka.exe", 0x4E364C, 0x4;
-        uint milliseconds: "Sulka.exe", 0x4E3624;
 	uint tuto_player_exists: "Sulka.exe", 0x469D20, 0x2A0, 0x10, 0x90, 0x2C, 0x40;
+	uint player_exists: "Sulka.exe", 0x469EB8, 0x51C, 0x50, 0xA8, 0x0, 0x180, 0x3C, 0x40;
 }
 init
 {
@@ -12,27 +11,12 @@ init
 startup
 {
 	print("STARTUP");
-	vars.is_timer_running = false;
 	vars.has_run_ended = false;
-	vars.n = 2;
 	vars.room_changed = false;
 }
 update
 {	
-	if (old.milliseconds != current.milliseconds)
-	{
-		vars.is_timer_running = true;
-		vars.n = 2;
-	}
-	else 
-	{
-		vars.n -= 1;
-	}
-	if (vars.n == 0)
-	{
-		vars.is_timer_running = false;
-	}
-	if (current.room == 2 && vars.is_timer_running == false)
+	if (current.room == 2 && current.player_exists == 0)
 	{
 		vars.has_run_ended = true;
 	}
